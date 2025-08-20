@@ -1,157 +1,222 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+/* Import ฟรอนต์ Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ตัวแปรสีและเงา */
 :root {
-  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --primary-color: #3825cb;
+  --primary-hover: #6c5ce7;
+  --income-color: #00b894;
+  --expense-color: #d63031;
+  --delete-color: #e84393;
+  --background-gradient: linear-gradient(135deg, #103e83, #dfe6e9);
+  --card-gradient: linear-gradient(145deg, #f7f2f2, #f7f8fa);
+  --box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
+/* Reset */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: #f7f7f7;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: var(--background-gradient);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
   min-height: 100vh;
-  margin: 0;
-  font-family: 'Lato', sans-serif;
+  padding: 20px;
+  color: #333;
+  line-height: 1.5;
 }
 
+/* Container Card */
 .container {
-  margin: 30px auto;
-  width: 350px;
+  width: 380px;
+  background: var(--card-gradient);
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  padding: 30px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Decoration SVG */
+.container::after {
+  content:"";
+  position:absolute;
+  bottom:-10px;
+  right:-10px;
+  width:80px;
+  height:80px;
+  background:url('https://www.svgrepo.com/show/331376/cute-money.svg') no-repeat center;
+  background-size:contain;
+  opacity:0.12;
+}
+
+/* Header */
 h1 {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
   letter-spacing: 1px;
-  margin: 0;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 h3 {
-  border-bottom: 1px solid #bbb;
-  padding-bottom: 10px;
-  margin: 40px 0 10px;
-}
-
-h4 {
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.inc-exp-container {
-  background-color: #fff;
-  box-shadow: var(--box-shadow);
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-}
-
-.inc-exp-container > div {
-  flex: 1;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #555;
   text-align: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+  margin: 28px 0 16px;
+  letter-spacing: 0.5px;
 }
 
-.inc-exp-container > div:first-of-type {
-  border-right: 1px solid #dedede;
+/* Balance / Income-Expense Box */
+.inc-exp-container {
+  display:flex;
+  justify-content:space-between;
+  background: var(--card-gradient);
+  border-radius:16px;
+  padding:22px;
+  margin:20px 0;
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.inc-exp-container:hover {
+  transform: translateY(-3px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+
+.inc-exp-container > div { 
+  flex:1; 
+  text-align:center; 
+}
+
+.inc-exp-container > div:first-of-type { 
+  border-right:1px solid #eee; 
 }
 
 .money {
-  font-size: 20px;
-  letter-spacing: 1px;
-  margin: 5px 0;
+  font-family: 'Inter', 'Roboto Mono', monospace;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 5px;
 }
 
-.money.plus {
-  color: #2ecc71;
+.money.plus { color: var(--income-color); }
+.money.minus { color: var(--expense-color); }
+
+/* Inputs */
+input[type='text'], input[type='number'] {
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:14px;
+  border:1px solid #ddd;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:15px;
+  line-height:1.4;
+  transition: all 0.3s ease;
 }
 
-.money.minus {
-  color: #c0392b;
+input:focus { 
+  border-color: var(--primary-color); 
+  box-shadow:0 0 12px rgba(56,37,203,0.2); 
+  outline:none; 
 }
 
-label {
-  display: inline-block;
-  margin: 10px 0;
-}
-
-input[type='text'],
-input[type='number'] {
-  border: 1px solid #dedede;
-  border-radius: 2px;
-  display: block;
-  font-size: 16px;
-  padding: 10px;
-  width: 100%;
-}
-
+/* Button */
 .btn {
-  cursor: pointer;
-  background-color: #9c88ff;
-  box-shadow: var(--box-shadow);
-  color: #fff;
-  border: 0;
-  display: block;
-  font-size: 16px;
-  margin: 10px 0 30px;
-  padding: 10px;
-  width: 100%;
+  width:100%;
+  padding:14px;
+  border-radius:20px;
+  border:none;
+  background: linear-gradient(90deg,#3825cb,#6c5ce7);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(108,92,231,0.3);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  transition: all 0.3s ease;
 }
 
-.btn:focus,
-.delete-btn:focus {
-  outline: 0;
+.btn:hover { 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 25px rgba(108,92,231,0.5); 
 }
 
+/* Transaction List */
 .list {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 40px;
+  list-style:none;
+  padding:0;
+  margin-bottom:40px;
 }
 
 .list li {
-  background-color: #fff;
-  box-shadow: var(--box-shadow);
-  color: #333;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  padding: 10px;
-  margin: 10px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  margin:12px 0;
+  border-radius:16px;
+  position:relative;
+  background: linear-gradient(120deg,#ffffff,#f3f4f6);
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:15px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.list li.plus {
-  border-right: 5px solid #2ecc71;
+.list li:hover { 
+  transform: translateX(5px); 
+  box-shadow:0 8px 20px rgba(0,0,0,0.1); 
 }
 
-.list li.minus {
-  border-right: 5px solid #c0392b;
-}
+.list li.plus { border-left:6px solid var(--income-color); }
+.list li.minus { border-left:6px solid var(--expense-color); }
 
+/* Delete Button */
 .delete-btn {
-  cursor: pointer;
-  background-color: #e74c3c;
-  border: 0;
-  color: #fff;
-  font-size: 20px;
-  line-height: 20px;
-  padding: 2px 5px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(-100%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translate(-100%,-50%);
+  background-color: var(--delete-color);
+  border:none;
+  color:#fff;
+  padding:6px 10px;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+  opacity:0;
+  transition: all 0.3s ease;
 }
 
-.list li:hover .delete-btn {
-  opacity: 1;
+.list li:hover .delete-btn { 
+  opacity:1; 
+  transform:translate(-120%,-50%); 
 }
 
-@media (max-width: 320px) {
-  .container {
-    width: 300px;
-  }
+/* Responsive */
+@media(max-width:420px){ 
+  .container{
+    width:95%; 
+    padding:20px;
+  } 
 }

@@ -1,12 +1,12 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
-// Initial state
+// Initial state เริ่มว่าง
 const initialState = {
-  transactions: []
-}
+  transactions: []  // ว่างเปล่าเริ่มต้น
+};
 
-// Create context
+// สร้าง Context
 export const GlobalContext = createContext(initialState);
 
 // Provider component
@@ -14,25 +14,21 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
-  function deleteTransaction(id) {
-    dispatch({
-      type: 'DELETE_TRANSACTION',
-      payload: id
-    });
-  }
-
   function addTransaction(transaction) {
-    dispatch({
-      type: 'ADD_TRANSACTION',
-      payload: transaction
-    });
+    dispatch({ type: 'ADD_TRANSACTION', payload: transaction });
   }
 
-  return (<GlobalContext.Provider value={{
-    transactions: state.transactions,
-    deleteTransaction,
-    addTransaction
-  }}>
-    {children}
-  </GlobalContext.Provider>);
-}
+  function deleteTransaction(id) {
+    dispatch({ type: 'DELETE_TRANSACTION', payload: id });
+  }
+
+  return (
+    <GlobalContext.Provider value={{
+      transactions: state.transactions,
+      addTransaction,
+      deleteTransaction
+    }}>
+      {children}
+    </GlobalContext.Provider>
+  );
+};

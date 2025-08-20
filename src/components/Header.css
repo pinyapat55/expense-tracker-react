@@ -1,0 +1,8 @@
+.header-title {
+  color: #ffffff; /* สีขาว */
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4); /* เงาเด่น */
+}
